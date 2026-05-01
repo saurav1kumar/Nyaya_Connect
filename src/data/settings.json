@@ -1,0 +1,6 @@
+{
+  "defaultConsultationFee": 499,
+  "platformCommission": 20,
+  "currency": "INR",
+  "freeCallDurationMinutes": 15
+}
