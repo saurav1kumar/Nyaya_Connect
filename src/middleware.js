@@ -5,7 +5,7 @@ export function middleware(request) {
   const session = request.cookies.get('admin-session');
 
   // Define admin routes that need protection
-  const adminRoutes = ['/', '/lawyers', '/analytics', '/settings'];
+  const adminRoutes = ['/admin', '/lawyers', '/analytics', '/settings'];
   const isAdminRoute = adminRoutes.some(route => pathname === route);
 
   // If trying to access an admin route without a session, redirect to login
@@ -15,10 +15,10 @@ export function middleware(request) {
     return NextResponse.redirect(url);
   }
 
-  // If trying to access login while already authenticated, redirect to dashboard
+  // If trying to access login while already authenticated, redirect to admin dashboard
   if (pathname === '/login' && session) {
     const url = request.nextUrl.clone();
-    url.pathname = '/';
+    url.pathname = '/admin';
     return NextResponse.redirect(url);
   }
 
@@ -27,5 +27,5 @@ export function middleware(request) {
 
 // Ensure middleware only runs on relevant paths
 export const config = {
-  matcher: ['/', '/lawyers', '/analytics', '/settings', '/login'],
+  matcher: ['/admin', '/lawyers', '/analytics', '/settings', '/login'],
 };
